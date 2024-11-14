@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import javax.servlet.DispatcherType;
+import io.swagger.v3.jaxrs2.integration.OpenApiServlet;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.hadoop.conf.Configuration;
@@ -255,13 +256,14 @@ public class RESTServer implements Constants {
     // Jetty set the default max thread number to 250, if we don't set it.
     //
     // Our default min thread number 2 is the same as that used by Jetty.
-    int maxThreads = servlet.getConfiguration().getInt(REST_THREAD_POOL_THREADS_MAX, 100);
-    int minThreads = servlet.getConfiguration().getInt(REST_THREAD_POOL_THREADS_MIN, 2);
+    Configuration configuration = servlet.getConfiguration();
+    int maxThreads = configuration.getInt(REST_THREAD_POOL_THREADS_MAX, 100);
+    int minThreads = configuration.getInt(REST_THREAD_POOL_THREADS_MIN, 2);
     // Use the default queue (unbounded with Jetty 9.3) if the queue size is negative, otherwise use
     // bounded {@link ArrayBlockingQueue} with the given size
-    int queueSize = servlet.getConfiguration().getInt(REST_THREAD_POOL_TASK_QUEUE_SIZE, -1);
+    int queueSize = configuration.getInt(REST_THREAD_POOL_TASK_QUEUE_SIZE, -1);
     int idleTimeout =
-      servlet.getConfiguration().getInt(REST_THREAD_POOL_THREAD_IDLE_TIMEOUT, 60000);
+      configuration.getInt(REST_THREAD_POOL_THREAD_IDLE_TIMEOUT, 60000);
     QueuedThreadPool threadPool = queueSize > 0
       ? new QueuedThreadPool(maxThreads, minThreads, idleTimeout,
         new ArrayBlockingQueue<>(queueSize))
@@ -274,10 +276,10 @@ public class RESTServer implements Constants {
     server.addEventListener(mbContainer);
     server.addBean(mbContainer);
 
-    String host = servlet.getConfiguration().get("hbase.rest.host", "0.0.0.0");
-    int servicePort = servlet.getConfiguration().getInt("hbase.rest.port", 8080);
+    String host = configuration.get("hbase.rest.host", "0.0.0.0");
+    int servicePort = configuration.getInt("hbase.rest.port", 8080);
     int httpHeaderCacheSize =
-      servlet.getConfiguration().getInt(HTTP_HEADER_CACHE_SIZE, DEFAULT_HTTP_HEADER_CACHE_SIZE);
+      configuration.getInt(HTTP_HEADER_CACHE_SIZE, DEFAULT_HTTP_HEADER_CACHE_SIZE);
     HttpConfiguration httpConfig = new HttpConfiguration();
     httpConfig.setSecureScheme("https");
     httpConfig.setSecurePort(servicePort);
@@ -321,23 +323,23 @@ public class RESTServer implements Constants {
         sslCtxFactory.setTrustStoreType(trustStoreType);
       }
 
-      String[] excludeCiphers = servlet.getConfiguration()
+      String[] excludeCiphers = configuration
         .getStrings(REST_SSL_EXCLUDE_CIPHER_SUITES, ArrayUtils.EMPTY_STRING_ARRAY);
       if (excludeCiphers.length != 0) {
         sslCtxFactory.setExcludeCipherSuites(excludeCiphers);
       }
-      String[] includeCiphers = servlet.getConfiguration()
+      String[] includeCiphers = configuration
         .getStrings(REST_SSL_INCLUDE_CIPHER_SUITES, ArrayUtils.EMPTY_STRING_ARRAY);
       if (includeCiphers.length != 0) {
         sslCtxFactory.setIncludeCipherSuites(includeCiphers);
       }
 
-      String[] excludeProtocols = servlet.getConfiguration().getStrings(REST_SSL_EXCLUDE_PROTOCOLS,
+      String[] excludeProtocols = configuration.getStrings(REST_SSL_EXCLUDE_PROTOCOLS,
         ArrayUtils.EMPTY_STRING_ARRAY);
       if (excludeProtocols.length != 0) {
         sslCtxFactory.setExcludeProtocols(excludeProtocols);
       }
-      String[] includeProtocols = servlet.getConfiguration().getStrings(REST_SSL_INCLUDE_PROTOCOLS,
+      String[] includeProtocols = configuration.getStrings(REST_SSL_INCLUDE_PROTOCOLS,
         ArrayUtils.EMPTY_STRING_ARRAY);
       if (includeProtocols.length != 0) {
         sslCtxFactory.setIncludeProtocols(includeProtocols);
@@ -350,7 +352,7 @@ public class RESTServer implements Constants {
       serverConnector = new ServerConnector(server, new HttpConnectionFactory(httpConfig));
     }
 
-    int acceptQueueSize = servlet.getConfiguration().getInt(REST_CONNECTOR_ACCEPT_QUEUE_SIZE, -1);
+    int acceptQueueSize = configuration.getInt(REST_CONNECTOR_ACCEPT_QUEUE_SIZE, -1);
     if (acceptQueueSize >= 0) {
       serverConnector.setAcceptQueueSize(acceptQueueSize);
     }
@@ -361,17 +363,24 @@ public class RESTServer implements Constants {
     server.addConnector(serverConnector);
     server.setStopAtShutdown(true);
 
+    OpenApiServlet openApiServlet = new OpenApiServlet();
+    ServletHolder openApiServletHolder = new ServletHolder(openApiServlet);
+    openApiServletHolder.setInitOrder(2);
+    openApiServletHolder.setInitParameter("openApi.configuration.resourcePackages", "org.apache.hadoop.hbase.rest");
+    openApiServletHolder.setInitParameter("openApi.configuration.scannerClass", "org.apache.hadoop.hbase.rest.openapi.HBaseRestAnnotationScanner");
+
     // set up context
     ServletContextHandler ctxHandler =
       new ServletContextHandler(server, "/", ServletContextHandler.SESSIONS);
     ctxHandler.addServlet(sh, PATH_SPEC_ANY);
+    ctxHandler.addServlet(openApiServletHolder, "/openapi/*");
     if (authFilter != null) {
       ctxHandler.addFilter(authFilter, PATH_SPEC_ANY, EnumSet.of(DispatcherType.REQUEST));
     }
 
     // Load filters from configuration.
     String[] filterClasses =
-      servlet.getConfiguration().getStrings(FILTER_CLASSES, GzipFilter.class.getName());
+      configuration.getStrings(FILTER_CLASSES, GzipFilter.class.getName());
     for (String filter : filterClasses) {
       filter = filter.trim();
       ctxHandler.addFilter(filter, PATH_SPEC_ANY, EnumSet.of(DispatcherType.REQUEST));
@@ -379,7 +388,7 @@ public class RESTServer implements Constants {
     addCSRFFilter(ctxHandler, conf);
     HttpServerUtil.addClickjackingPreventionFilter(ctxHandler, conf, PATH_SPEC_ANY);
     HttpServerUtil.addSecurityHeadersFilter(ctxHandler, conf, isSecure, PATH_SPEC_ANY);
-    HttpServerUtil.constrainHttpMethods(ctxHandler, servlet.getConfiguration()
+    HttpServerUtil.constrainHttpMethods(ctxHandler, configuration
       .getBoolean(REST_HTTP_ALLOW_OPTIONS_METHOD, REST_HTTP_ALLOW_OPTIONS_METHOD_DEFAULT));
 
     // Put up info server.
