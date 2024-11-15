@@ -19,6 +19,10 @@ package org.apache.hadoop.hbase.rest;
 
 import java.io.IOException;
 import javax.servlet.ServletContext;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.apache.hadoop.hbase.rest.model.NamespacesModel;
 import org.apache.yetus.audience.InterfaceAudience;
 import org.slf4j.Logger;
@@ -59,6 +63,12 @@ public class NamespacesResource extends ResourceBase {
   @GET
   @Produces({ MIMETYPE_TEXT, MIMETYPE_XML, MIMETYPE_JSON, MIMETYPE_PROTOBUF,
     MIMETYPE_PROTOBUF_IETF })
+  @Operation(
+    summary = "List all namespaces",
+    responses = {
+      @ApiResponse(content = @Content(schema = @Schema(implementation = NamespacesModel.class))),
+    }
+  )
   public Response get(final @Context ServletContext context, final @Context UriInfo uriInfo) {
     if (LOG.isTraceEnabled()) {
       LOG.trace("GET " + uriInfo.getAbsolutePath());

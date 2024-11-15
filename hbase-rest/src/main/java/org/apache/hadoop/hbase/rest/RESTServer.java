@@ -367,7 +367,8 @@ public class RESTServer implements Constants {
     ServletHolder openApiServletHolder = new ServletHolder(openApiServlet);
     openApiServletHolder.setInitOrder(2);
     openApiServletHolder.setInitParameter("openApi.configuration.resourcePackages", "org.apache.hadoop.hbase.rest");
-    openApiServletHolder.setInitParameter("openApi.configuration.scannerClass", "org.apache.hadoop.hbase.rest.openapi.HBaseRestAnnotationScanner");
+    // openApiServletHolder.setInitParameter("openApi.configuration.scannerClass", "org.apache.hadoop.hbase.rest.openapi.HBaseRestAnnotationScanner");
+    openApiServletHolder.setInitParameter("openApi.configuration.scannerClass", "io.swagger.v3.oas.integration.GenericOpenApiScanner");
 
     // set up context
     ServletContextHandler ctxHandler =

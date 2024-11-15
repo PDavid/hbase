@@ -20,6 +20,10 @@ package org.apache.hadoop.hbase.rest;
 import java.io.IOException;
 import java.util.EnumSet;
 import java.util.Map;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.apache.hadoop.hbase.ClusterMetrics;
 import org.apache.hadoop.hbase.ClusterMetrics.Option;
 import org.apache.hadoop.hbase.RegionMetrics;
@@ -60,6 +64,12 @@ public class StorageClusterStatusResource extends ResourceBase {
   @GET
   @Produces({ MIMETYPE_TEXT, MIMETYPE_XML, MIMETYPE_JSON, MIMETYPE_PROTOBUF,
     MIMETYPE_PROTOBUF_IETF })
+  @Operation(
+    summary = "Cluster status",
+    responses = {
+      @ApiResponse(content = @Content(schema = @Schema(implementation = StorageClusterStatusModel.class))),
+    }
+  )
   public Response get(final @Context UriInfo uriInfo) {
     if (LOG.isTraceEnabled()) {
       LOG.trace("GET " + uriInfo.getAbsolutePath());

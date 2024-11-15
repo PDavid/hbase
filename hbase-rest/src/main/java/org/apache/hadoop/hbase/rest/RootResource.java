@@ -18,6 +18,13 @@
 package org.apache.hadoop.hbase.rest;
 
 import java.io.IOException;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.servers.Server;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.rest.model.TableListModel;
 import org.apache.hadoop.hbase.rest.model.TableModel;
@@ -35,6 +42,8 @@ import org.apache.hbase.thirdparty.javax.ws.rs.core.Response;
 import org.apache.hbase.thirdparty.javax.ws.rs.core.Response.ResponseBuilder;
 import org.apache.hbase.thirdparty.javax.ws.rs.core.UriInfo;
 
+@OpenAPIDefinition(info = @Info(title = "Apache HBase REST API", version = "1.2.3", description = "REST API server component of Apache HBase"),
+  servers = @Server(url = "/openapi"))
 @Path("/")
 @InterfaceAudience.Private
 public class RootResource extends ResourceBase {
@@ -66,6 +75,12 @@ public class RootResource extends ResourceBase {
   @GET
   @Produces({ MIMETYPE_TEXT, MIMETYPE_XML, MIMETYPE_JSON, MIMETYPE_PROTOBUF,
     MIMETYPE_PROTOBUF_IETF })
+  @Operation(
+    summary = "List of all non-system tables",
+    responses = {
+      @ApiResponse(content = @Content(schema = @Schema(implementation = TableListModel.class))),
+    }
+  )
   public Response get(final @Context UriInfo uriInfo) {
     if (LOG.isTraceEnabled()) {
       LOG.trace("GET " + uriInfo.getAbsolutePath());
