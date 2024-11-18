@@ -37,6 +37,10 @@ section {
   border-bottom: 1px solid #eee;
 }
 
+.page-header small {
+  font-size: 65%;
+}
+
 .tab-content {
   padding-bottom: 9px;
   border-bottom: 1px solid #ddd;
