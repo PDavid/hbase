@@ -63,7 +63,7 @@ if (master.getServerManager() != null) {
         <li class=""><a href="#tab_rsgroup_storeStats" data-toggle="tab">Storefiles</a></li>
         <li class=""><a href="#tab_rsgroup_compactStats" data-toggle="tab">Compactions</a></li>
     </ul>
-    <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+    <div class="tab-content">
         <div class="tab-pane active" id="tab_rsgroup_baseStats">
             <& rsgroup_baseStats; rsGroupInfos = rsGroupInfos; collectServers= collectServers &>
         </div>

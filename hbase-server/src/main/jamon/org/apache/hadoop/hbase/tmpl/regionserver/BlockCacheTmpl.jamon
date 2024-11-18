@@ -52,7 +52,7 @@ org.apache.hadoop.util.StringUtils.TraditionalBinaryPrefix;
         <li class=""><a href="#tab_bc_l1" data-toggle="tab">L1</a></li>
         <li class=""><a href="#tab_bc_l2" data-toggle="tab">L2</a></li>
     </ul>
-    <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+    <div class="tab-content">
         <div class="tab-pane active" id="tab_bc_baseInfo">
             <& bc_baseInfo; bc = bc; bcUrl = bcUrl; bcName = bcName;  &>
         </div>

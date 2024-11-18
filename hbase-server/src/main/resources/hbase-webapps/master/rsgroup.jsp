@@ -136,7 +136,7 @@
           </li>
         </ul>
 
-      <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+      <div class="tab-content">
         <div class="tab-pane active" id="tab_baseStats">
           <table class="table table-striped">
             <tr>

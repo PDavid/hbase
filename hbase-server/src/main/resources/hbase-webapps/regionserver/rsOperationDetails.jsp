@@ -89,7 +89,7 @@
       <a href="#tab_named_queue2" data-toggle="tab"> Large Response RPCs </a>
     </li>
   </ul>
-    <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+    <div class="tab-content">
       <div class="tab-pane active" id="tab_named_queue1">
       <p>Slow RPCs record those RPCs whose processing time is greater than the threshold (see the setting 'hbase.ipc.warn.response.time' for details)</p>
         <table class="table table-striped" style="white-space:nowrap">

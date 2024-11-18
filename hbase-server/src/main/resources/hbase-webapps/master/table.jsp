@@ -309,7 +309,7 @@
     <li class=""><a href="#metaTab_compactStats" data-toggle="tab">Compactions</a></li>
   </ul>
 
-  <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+  <div class="tab-content">
     <div class="tab-pane active" id="metaTab_baseStats">
       <table id="metaTableBaseStatsTable" class="tablesorter table table-striped">
         <thead>
@@ -927,7 +927,7 @@
     <li class=""><a href="#tab_localityStats" data-toggle="tab">Localities</a></li>
     <li class=""><a href="#tab_compactStats" data-toggle="tab">Compactions</a></li>
   </ul>
-  <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+  <div class="tab-content">
     <div class="tab-pane active" id="tab_baseStats">
       <table id="tableBaseStatsTable" class="tablesorter table table-striped">
         <thead>

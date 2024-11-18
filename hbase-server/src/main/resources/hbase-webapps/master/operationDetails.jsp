@@ -65,7 +65,7 @@
           <a href="#tab_named_queue2" data-toggle="tab"> Balancer Decision </a>
     </li>
   </ul>
-    <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+    <div class="tab-content">
       <div class="tab-pane active" id="tab_named_queue1">
       <p>Balancer Rejection explain why balancer is skipping runs and explain all factors considered</p>
         <table class="table table-striped">

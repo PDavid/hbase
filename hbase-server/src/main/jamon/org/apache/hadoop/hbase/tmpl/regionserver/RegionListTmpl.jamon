@@ -55,7 +55,7 @@
             <li class=""><a href="#tab_regionMemstoreStats" data-toggle="tab">Memstore Metrics</a></li>
             <li class=""><a href="#tab_regionCompactStats" data-toggle="tab">Compaction Metrics</a></li>
         </ul>
-        <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+        <div class="tab-content">
             <div class="tab-pane active" id="tab_regionBaseInfo">
                 <& baseInfo; onlineRegions = onlineRegions; &>
             </div>
