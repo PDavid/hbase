@@ -187,7 +187,7 @@ AssignmentManager assignmentManager = master.getAssignmentManager();
 	<%if master.isActiveMaster() %>
         <div class="row inner_header top_header">
             <div class="page-header">
-                <h1>Master <small class="text-secondary"><% master.getServerName().getHostname() %></small></h1>
+                <h1>Master <small><% master.getServerName().getHostname() %></small></h1>
             </div>
         </div>
 
