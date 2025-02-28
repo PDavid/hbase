@@ -23,64 +23,39 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
   <skin>
-    <!-- We tried to get some changes to the fluido-skin committed upstream
-         but with little success. This is a custom artifact that contains
-         some commits over the official maven-fluido-skin 1.4 release. The
-         actual code is available at:
-         https://github.com/joshelser/maven-fluido-skin/tree/1.4-HBase-patched.
-         The hope is that we can get these fixes included upstream and
-         remove the need for this custom fork. This is published to
-         my end-user's GAV for ease of releasing this to maven central
-         until the upstream update happens and is released.
-         See HBASE-14785 and HBASE-21005 for more info. -->
-    <groupId>org.apache.maven.skins</groupId>
-    <artifactId>maven-fluido-skin</artifactId>
-    <version>1.12.0</version>
+    <groupId>io.github.stevecrox.maven.skins</groupId>
+    <artifactId>bootstrap-site-skin</artifactId>
+    <version>1.4.3</version>
   </skin>
   <custom>
-    <fluidoSkin>
-      <topBarEnabled>true</topBarEnabled>
-      <sideBarEnabled>false</sideBarEnabled>
-      <googleSearch>
-        <!-- The ID of the Google custom search engine to use.
-             This one searches hbase.apache.org, issues.apache.org/browse/HBASE-*,
-             and user and dev mailing list archives. -->
-        <customSearch>000385458301414556862:sq1bb0xugjg</customSearch>
-      </googleSearch>
-      <sourceLineNumbersEnabled>false</sourceLineNumbersEnabled>
-      <skipGenerationDate>true</skipGenerationDate>
-      <breadcrumbDivider>»</breadcrumbDivider>
+    <bootstrapSkin>
+      <navbar>
+        <style>navbar-light bg-light</style>
+        <menuOrientation>right</menuOrientation>
+        <icon>
+          <alt>HBase logo</alt>
+          <title>Apache HBase</title>
+          <href>/</href>
+          <src>images/hbase_logo_with_orca_large.png</src>
+          <width>unset</width>
+        </icon>
+      </navbar>
       <gitHub>
-        <projectId>apache/hbase</projectId>
-        <ribbonOrientation>right</ribbonOrientation>
-        <ribbonColor>red</ribbonColor>
+        <organisation>apache</organisation>
+        <repository>hbase</repository>
       </gitHub>
-    </fluidoSkin>
+    </bootstrapSkin>
   </custom>
-  <bannerLeft>
-    <name />
-    <src />
-    <href />
-    <!--
-    <name/>
-    <height>0</height>
-    <width>0</width>
--->
-  </bannerLeft>
-  <bannerRight>
+  <!--<bannerLeft>
     <name>Apache HBase</name>
     <src>images/hbase_logo_with_orca_large.png</src>
-    <href>http://hbase.apache.org/</href>
-  </bannerRight>
-  <publishDate position="none"/>
+    <href>https://hbase.apache.org/</href>
+  </bannerLeft>-->
+  <publishDate position="right"/>
   <version position="none"/>
   <body>
     <head>
-      <![CDATA[<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-      <link rel="stylesheet" href="css/bootstrap-responsive.min.css"/>
-      <link rel="stylesheet" href="css/github.min.css"/>
-      <link rel="stylesheet" href="css/site.css"/>
-      <script src="js/highlight.min.js"></script>]]>
+      <![CDATA[<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>]]>
     </head>
     <menu name="Apache HBase Project">
       <item name="Overview" href="index.html"/>
@@ -88,7 +63,6 @@
       <item name="Downloads" href="downloads.html"/>
       <item name="Release Notes" href="https://issues.apache.org/jira/browse/HBASE?report=com.atlassian.jira.plugin.system.project:changelog-panel#selectedTab=com.atlassian.jira.plugin.system.project%3Achangelog-panel" />
       <item name="Code Of Conduct" href="coc.html"/>
-      <item name="Blog" href="http://blogs.apache.org/hbase/"/>
       <item name="Mailing Lists" href="mailing-lists.html"/>
       <item name="Team" href="team.html"/>
       <item name="HBase Sponsors" href="sponsors.html"/>
@@ -115,7 +89,7 @@
       <item name="User API (Test)" href="testapidocs/index.html" target="_blank" />
       <item name="Developer API" href="devapidocs/index.html" target="_blank" />
       <item name="Developer API (Test)" href="testdevapidocs/index.html" target="_blank" />
-      <item name="中文参考指南(单页)" href="http://abloz.com/hbase/book.html" target="_blank" />
+      <item name="中文参考指南(单页)" href="https://abloz.com/hbase/book.html" target="_blank" />
       <item name="FAQ" href="book.html#faq" target="_blank" />
       <item name="Videos/Presentations" href="book.html#other.info" target="_blank" />
       <item name="Wiki" href="https://cwiki.apache.org/confluence/display/HADOOP2/Hbase" target="_blank" />
@@ -123,13 +97,13 @@
       <item name="Bulk Loads" href="book.html#arch.bulk.load" target="_blank" />
       <item name="Metrics" href="metrics.html" target="_blank" />
       <item name="Cluster replication" href="book.html#replication" target="_blank" />
-      <item name="1.4 Documentation">
+      <item name="1.4 Documentation" href="#">
         <item name="Ref Guide" href="1.4/book.html" target="_blank" />
         <item name="Reference Guide (PDF)" href="1.4/book.pdf" target="_blank" />
         <item name="User API" href="1.4/apidocs/index.html" target="_blank" />
         <item name="Developer API" href="1.4/devapidocs/index.html" target="_blank" />
       </item>
-      <item name="2.3 Documentation">
+      <item name="2.3 Documentation" href="#">
         <item name="Ref Guide" href="2.3/book.html" target="_blank" />
         <item name="Reference Guide (PDF)" href="2.3/apache_hbase_reference_guide.pdf" target="_blank" />
         <item name="User API" href="2.3/apidocs/index.html" target="_blank" />
@@ -137,7 +111,7 @@
         <item name="Developer API" href="2.3/devapidocs/index.html" target="_blank" />
         <item name="Developer API (Test)" href="2.3/testdevapidocs/index.html" target="_blank" />
       </item>
-      <item name="2.4 Documentation">
+      <item name="2.4 Documentation" href="#">
         <item name="Ref Guide" href="2.4/book.html" target="_blank" />
         <item name="Reference Guide (PDF)" href="2.4/apache_hbase_reference_guide.pdf" target="_blank" />
         <item name="User API" href="2.4/apidocs/index.html" target="_blank" />
@@ -145,13 +119,13 @@
         <item name="Developer API" href="2.4/devapidocs/index.html" target="_blank" />
         <item name="Developer API (Test)" href="2.4/testdevapidocs/index.html" target="_blank" />
       </item>
-      <item name="2.5 Documentation">
+      <item name="2.5 Documentation" href="#">
         <item name="User API" href="2.5/apidocs/index.html" target="_blank" />
         <item name="User API (Test)" href="2.5/testapidocs/index.html" target="_blank" />
         <item name="Developer API" href="2.5/devapidocs/index.html" target="_blank" />
         <item name="Developer API (Test)" href="2.5/testdevapidocs/index.html" target="_blank" />
       </item>
-      <item name="2.6 Documentation">
+      <item name="2.6 Documentation" href="#">
         <item name="User API" href="2.6/apidocs/index.html" target="_blank" />
         <item name="User API (Test)" href="2.6/testapidocs/index.html" target="_blank" />
         <item name="Developer API" href="2.6/devapidocs/index.html" target="_blank" />
@@ -159,9 +133,9 @@
       </item>
     </menu>
     <menu name="ASF">
-      <item name="Apache Software Foundation" href="http://www.apache.org/foundation/" target="_blank" />
-      <item name="How Apache Works" href="http://www.apache.org/foundation/how-it-works.html" target="_blank" />
-      <item name="Sponsoring Apache" href="http://www.apache.org/foundation/sponsorship.html" target="_blank" />
+      <item name="Apache Software Foundation" href="https://www.apache.org/foundation/" target="_blank" />
+      <item name="How Apache Works" href="https://www.apache.org/foundation/how-it-works.html" target="_blank" />
+      <item name="Sponsoring Apache" href="https://www.apache.org/foundation/sponsorship.html" target="_blank" />
       <item name="Privacy Policy" href="https://privacy.apache.org/policies/privacy-policy-public.html" />
     </menu>
     <footer>
