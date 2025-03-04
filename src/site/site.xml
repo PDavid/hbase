@@ -19,9 +19,8 @@
  */
 -->
 
-<project xmlns="http://maven.apache.org/DECORATION/1.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+<project xmlns="http://maven.apache.org/DECORATION/1.8.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd">
   <skin>
     <groupId>com.bernardomg.maven.skins</groupId>
     <artifactId>docs-maven-skin</artifactId>
@@ -36,13 +35,15 @@
         <menu>ASF</menu>
       </topNav>
       <bottomNav>
-
+        <menu>Releases</menu>
       </bottomNav>
       <iconNav>
         <menu>Icons</menu>
       </iconNav>
     </skinConfig>
   </custom>
+  <publishDate position="none"/>
+  <version position="none"/>
   <body>
     <head>
       <![CDATA[<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>]]>
@@ -129,10 +130,14 @@
       <item name="Sponsoring Apache" href="https://www.apache.org/foundation/sponsorship.html" target="_blank" />
       <item name="Privacy Policy" href="https://privacy.apache.org/policies/privacy-policy-public.html" />
     </menu>
+    <menu name="Releases" inherit="bottom">
+      <item name="Maven Central" href="${mavenURL}" />
+      <item name="GitHub" href="${githubArtifactURL}" />
+    </menu>
     <menu name="Icons" inherit="bottom">
       <item name="GitHub" img="fa-brands fa-github" href="${project.scm.url}" />
     </menu>
-    <footer>
+    <!--<footer>
       <![CDATA[
       <div style="float: left">
         Copyright ©2007–${current.year} <a href="https://www.apache.org">The Apache Software Foundation</a>. All rights reserved.<br>
@@ -143,6 +148,6 @@
         Last Published: ${current.date}
       </div>
       ]]>
-    </footer>
+    </footer>-->
   </body>
 </project>
