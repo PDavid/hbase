@@ -29,7 +29,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
 
-  <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="/static/css/hbase.css" rel="stylesheet">
   <link rel="shortcut icon" href="/static/favicon.ico">
 </head>

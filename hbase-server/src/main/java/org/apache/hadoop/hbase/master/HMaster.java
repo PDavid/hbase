@@ -277,6 +277,7 @@ import org.apache.yetus.audience.InterfaceAudience;
 import org.apache.zookeeper.KeeperException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.webjars.servlet.WebjarsServlet;
 
 import org.apache.hbase.thirdparty.com.google.common.collect.Lists;
 import org.apache.hbase.thirdparty.com.google.common.collect.Maps;
@@ -771,6 +772,7 @@ public class HMaster extends HBaseServerBase<MasterRpcServices> implements Maste
   @Override
   protected void configureInfoServer(InfoServer infoServer) {
     infoServer.addUnprivilegedServlet("master-status", "/master-status", MasterStatusServlet.class);
+    infoServer.addUnprivilegedServlet("webjars", "/webjars/*", WebjarsServlet.class);
     infoServer.addUnprivilegedServlet("api_v1", "/api/v1/*", buildApiV1Servlet());
     infoServer.addUnprivilegedServlet("hbck", "/hbck/*", buildHbckServlet());
 

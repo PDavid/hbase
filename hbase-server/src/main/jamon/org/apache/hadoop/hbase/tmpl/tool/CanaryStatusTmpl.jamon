@@ -38,7 +38,7 @@ org.apache.hadoop.hbase.util.JvmVersion;
     <title>Canary</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/hbase.css" rel="stylesheet">
     <link rel="shortcut icon" href="/static/favicon.ico">
   </head>
@@ -135,8 +135,8 @@ org.apache.hadoop.hbase.util.JvmVersion;
         </div>
     </div> <!-- /container -->
 
-    <script src="/static/js/jquery.min.js" type="text/javascript"></script>
-    <script src="/static/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/webjars/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="/static/js/tab.js" type="text/javascript"></script>
   </body>
 </html>

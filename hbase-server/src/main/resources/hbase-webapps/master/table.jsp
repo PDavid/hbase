@@ -1285,7 +1285,7 @@
 </div> <!--/.container-fluid -->
 
 <jsp:include page="footer.jsp" />
-<script src="/static/js/jquery.tablesorter.min.js" type="text/javascript"></script>
+<script src="/webjars/tablesorter/js/jquery.tablesorter.min.js" type="text/javascript"></script>
 
 <script>
 $(document).ready(function()
