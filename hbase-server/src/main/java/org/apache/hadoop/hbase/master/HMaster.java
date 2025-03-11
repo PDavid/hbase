@@ -296,6 +296,7 @@ import org.apache.hbase.thirdparty.org.glassfish.jersey.servlet.ServletContainer
 import org.apache.hadoop.hbase.shaded.protobuf.RequestConverter;
 import org.apache.hadoop.hbase.shaded.protobuf.generated.AdminProtos.GetRegionInfoResponse;
 import org.apache.hadoop.hbase.shaded.protobuf.generated.SnapshotProtos.SnapshotDescription;
+import org.webjars.servlet.WebjarsServlet;
 
 /**
  * HMaster is the "master server" for HBase. An HBase cluster has one active master. If many masters
@@ -771,6 +772,7 @@ public class HMaster extends HBaseServerBase<MasterRpcServices> implements Maste
   @Override
   protected void configureInfoServer(InfoServer infoServer) {
     infoServer.addUnprivilegedServlet("master-status", "/master-status", MasterStatusServlet.class);
+    infoServer.addUnprivilegedServlet("webjars", "/webjars/*", WebjarsServlet.class);
     infoServer.addUnprivilegedServlet("api_v1", "/api/v1/*", buildApiV1Servlet());
     infoServer.addUnprivilegedServlet("hbck", "/hbck/*", buildHbckServlet());
 
