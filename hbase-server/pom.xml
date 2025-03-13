@@ -251,21 +251,25 @@
       <artifactId>jquery</artifactId>
       <version>3.5.1</version>
     </dependency>
+    <!-- TODO (paksyd): Ideally we'd need tablesorter v2.31.3 instead! -->
     <dependency>
       <groupId>org.webjars.bower</groupId>
       <artifactId>jquery.tablesorter</artifactId>
       <version>2.31.1</version>
     </dependency>
+    <!-- FIXME (paksyd): We need vega 5.32.0 instead! -->
     <dependency>
-      <groupId>org.webjars.npm</groupId>
+      <groupId>org.webjars.bower</groupId>
       <artifactId>vega</artifactId>
-      <version>5.30.0</version>
+      <version>4.5.1</version>
     </dependency>
+    <!-- FIXME (paksyd): We need vega-embed 6.29.0 instead! -->
     <dependency>
       <groupId>org.webjars.npm</groupId>
       <artifactId>vega-embed</artifactId>
       <version>6.21.0</version>
     </dependency>
+    <!-- FIXME (paksyd): We need vega-embed 5.23.0 instead! -->
     <dependency>
       <groupId>org.webjars.npm</groupId>
       <artifactId>vega-lite</artifactId>
