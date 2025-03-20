@@ -149,7 +149,7 @@
           <artifactId>jquery.tablesorter</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>org.webjars.npm</groupId>
+          <groupId>org.webjars</groupId>
           <artifactId>vega</artifactId>
         </exclusion>
         <exclusion>

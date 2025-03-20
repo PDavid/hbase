@@ -17,7 +17,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 </%doc>
 
-    <script type="text/javascript" src="/webjars/vega/4.5.1/docs/vega.min.js"></script>
+    <script type="text/javascript" src="/webjars/vega/vega.min.js"></script>
     <script type="text/javascript" src="/webjars/vega-lite/build/vega-lite.min.js"></script>
     <script type="text/javascript" src="/webjars/vega-embed/build/vega-embed.min.js"></script>
 

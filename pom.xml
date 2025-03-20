@@ -2754,26 +2754,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
         <executions>
-        <!--  <execution>
-            <id>unpack-ui-resources</id>
-            <goals>
-              <goal>unpack</goal>
-            </goals>
-            <phase>process-resources</phase>
-            <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>org.webjars.npm</groupId>
-                  <artifactId>vega-lite</artifactId>
-                  <version>5.21.0</version>
-                  <type>jar</type>
-                  <overWrite>true</overWrite>
-                  <includes>**/build/vega-lite.min.js</includes>
-                </artifactItem>
-              </artifactItems>
-              <outputDirectory>${project.build.directory}</outputDirectory>
-            </configuration>
-          </execution> -->
           <execution>
             <id>unpack-website-resources</id>
             <goals>
@@ -3009,29 +2989,6 @@
               </target>
             </configuration>
           </execution>
-      <!--    <execution>
-             Copy static CSS and JS files for the UI. -->
-       <!--     <id>copy-css-js-to-ui</id>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <phase>process-resources</phase>
-            <configuration>
-              <target>
-                <copy flatten="true" todir="${project.build.directory}/hbase-webapps/static/js">
-                  <fileset dir="${webjars-dir}/vega/5.30.0/build">
-                    <include name="vega.min.js"/>
-                  </fileset>
-                  <fileset dir="${webjars-dir}/vega-embed/6.21.0/build">
-                    <include name="vega-embed.min.js"/>
-                  </fileset>
-                  <fileset dir="${webjars-dir}/vega-lite/5.21.0/build">
-                    <include name="vega-lite.min.js"/>
-                  </fileset>
-                </copy>
-              </target>
-            </configuration>
-          </execution> -->
           <execution>
             <!-- Copy static CSS and JS files for the website. -->
             <id>copy-css-js-to-site</id>
