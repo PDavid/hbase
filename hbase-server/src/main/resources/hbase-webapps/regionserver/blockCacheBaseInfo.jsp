@@ -18,14 +18,10 @@
  */
 --%>
 <%@ page contentType="text/html;charset=UTF-8"
-         import="org.apache.hadoop.hbase.io.hfile.BlockCache"
-         import="org.apache.hadoop.hbase.regionserver.HRegionServer" %>
+         import="org.apache.hadoop.hbase.io.hfile.BlockCache" %>
 
 <%
-  HRegionServer regionServer =
-    (HRegionServer) getServletContext().getAttribute(HRegionServer.REGIONSERVER);
-
-  BlockCache bc = regionServer.getBlockCache().orElse(null);
+  BlockCache bc = (BlockCache) request.getAttribute("bc");
 
   String bcUrl = bc == null ? null : "http://hbase.apache.org/devapidocs/" + bc.getClass().getName().replaceAll("\\.", "/") + ".html";
   String bcName = bc == null ? null : bc.getClass().getSimpleName();

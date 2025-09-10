@@ -19,14 +19,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8"
          import="org.apache.hadoop.hbase.io.hfile.BlockCache"
-         import="org.apache.hadoop.hbase.regionserver.HRegionServer"
          import="org.apache.hadoop.hbase.io.hfile.AgeSnapshot" %>
 
 <%
-  HRegionServer regionServer =
-    (HRegionServer) getServletContext().getAttribute(HRegionServer.REGIONSERVER);
-
-  BlockCache bc = regionServer.getBlockCache().orElse(null);
+  BlockCache bc = (BlockCache) request.getAttribute("bc");
 
   AgeSnapshot ageAtEvictionSnapshot = bc.getStats().getAgeAtEvictionSnapshot();
   // Only show if non-zero mean and stddev as is the case in combinedblockcache

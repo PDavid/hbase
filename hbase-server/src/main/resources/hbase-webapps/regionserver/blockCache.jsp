@@ -20,12 +20,15 @@
 <%@ page contentType="text/html;charset=UTF-8"
          import="org.apache.hadoop.hbase.io.hfile.BlockCache"
          import="org.apache.hadoop.hbase.regionserver.HRegionServer" %>
+<%@ page import="org.apache.hadoop.hbase.io.hfile.CacheConfig" %>
 
 <%-- Template for rendering Block Cache tabs in RegionServer Status page. --%>
 
 <%
   HRegionServer regionServer =
     (HRegionServer) getServletContext().getAttribute(HRegionServer.REGIONSERVER);
+
+  CacheConfig cacheConfig = new CacheConfig(regionServer.getConfiguration());
 
   BlockCache bc = regionServer.getBlockCache().orElse(null);
 
@@ -46,12 +49,15 @@
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="tab_bc_baseInfo" role="tabpanel">
+      <% request.setAttribute("bc", bc); %>
       <jsp:include page="blockCacheBaseInfo.jsp"/>
     </div>
     <div class="tab-pane" id="tab_bc_config" role="tabpanel">
+      <% request.setAttribute("cacheConfig", cacheConfig); %>
       <jsp:include page="blockCacheConfig.jsp"/>
     </div>
     <div class="tab-pane" id="tab_bc_stats" role="tabpanel">
+      <% request.setAttribute("bc", bc); %>
       <jsp:include page="blockCacheStats.jsp"/>
     </div>
     <div class="tab-pane" id="tab_bc_l1" role="tabpanel">

@@ -18,19 +18,12 @@
  */
 --%>
 <%@ page contentType="text/html;charset=UTF-8"
-         import="org.apache.hadoop.hbase.io.hfile.CacheConfig"
-         import="org.apache.hadoop.hbase.regionserver.HRegionServer" %>
+         import="org.apache.hadoop.hbase.io.hfile.CacheConfig" %>
 
 <%
-  HRegionServer regionServer =
-    (HRegionServer) getServletContext().getAttribute(HRegionServer.REGIONSERVER);
-
-  CacheConfig cacheConfig = new CacheConfig(regionServer.getConfiguration());
-%>
-
-<%-- TODO: Can cacheConfig be null if we just instantiated it? --%>
-<% if (cacheConfig == null) { %>
-<p>CacheConfig is null</p>
+  CacheConfig cacheConfig = (CacheConfig) request.getAttribute("cacheConfig");
+if (cacheConfig == null) { %>
+  <p>CacheConfig is null</p>
 <% } else { %>
 <table class="table table-striped">
   <tr>

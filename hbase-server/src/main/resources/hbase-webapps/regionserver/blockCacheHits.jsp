@@ -18,14 +18,10 @@
  */
 --%>
 <%@ page contentType="text/html;charset=UTF-8"
-         import="org.apache.hadoop.hbase.io.hfile.BlockCache"
-         import="org.apache.hadoop.hbase.regionserver.HRegionServer" %>
+         import="org.apache.hadoop.hbase.io.hfile.BlockCache" %>
 
 <%
-  HRegionServer regionServer =
-    (HRegionServer) getServletContext().getAttribute(HRegionServer.REGIONSERVER);
-
-  BlockCache bc = regionServer.getBlockCache().orElse(null);
+  BlockCache bc = (BlockCache) request.getAttribute("bc");
 
   int hitPeriods = 0;
   for (int i = 0; i < bc.getStats().getNumPeriodsInWindow(); i++) {

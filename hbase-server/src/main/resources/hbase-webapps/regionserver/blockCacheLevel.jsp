@@ -24,7 +24,6 @@
          import="org.apache.hadoop.hbase.io.hfile.BlockCacheUtil"
          import="org.apache.hadoop.hbase.io.hfile.LruBlockCache"
          import="org.apache.hadoop.hbase.io.hfile.bucket.BucketCacheStats"
-         import="org.apache.hadoop.hbase.io.hfile.bucket.BucketAllocator"
          import="org.apache.hadoop.hbase.io.hfile.bucket.BucketCache"
          import="org.apache.hadoop.util.StringUtils.TraditionalBinaryPrefix" %>
 
@@ -51,16 +50,14 @@
   String bcName = bc.getClass().getSimpleName();
   int maxCachedBlocksByFile = BlockCacheUtil.getMaxCachedBlocksByFile(configuration);
 
-  boolean lru = bc instanceof LruBlockCache;
+  boolean isLru = bc instanceof LruBlockCache;
 
-  boolean bucketCache = bc.getClass().getSimpleName().equals("BucketCache");
+  boolean isBucketCache = bc.getClass().getSimpleName().equals("BucketCache");
   BucketCacheStats bucketCacheStats = null;
-  // TODO: This bucketAllocator variable seems not to be used at all!
-  BucketAllocator bucketAllocator = null;
-
-  if (bucketCache) {
-    bucketCacheStats = (BucketCacheStats)bc.getStats();
-    bucketAllocator = ((BucketCache)bc).getAllocator();
+  BucketCache bucketCache = null;
+  if (bc instanceof BucketCache) {
+    bucketCache = (BucketCache) bc;
+    bucketCacheStats = (BucketCacheStats) bc.getStats();
   }
 %>
 
@@ -75,11 +72,10 @@
     <td><a href="<%= bcUrl %>"><%= bcName %></a></td>
     <td>Class implementing this block cache Level</td>
   </tr>
-<% if (bucketCache) { %>
+<% if (isBucketCache) { %>
   <tr>
     <td>Implementation</td>
-    <%-- TODO: Missing link here! --%>
-    <td><%= ((BucketCache)bc).getIoEngine() %></a></td>
+    <td><%= bucketCache.getIoEngine() %></td>
     <td>IOEngine</td>
   </tr>
 <% } %>
@@ -93,14 +89,14 @@
     <td><%= String.format("%,d", bc.getBlockCount()) %></td>
     <td>Count of Blocks</td>
   </tr>
-<% if (!bucketCache) { %>
+<% if (!isBucketCache) { %>
   <tr>
     <td>Data Block Count</td>
     <td><%= String.format("%,d", bc.getDataBlockCount()) %></td>
     <td>Count of DATA Blocks</td>
   </tr>
 <% } %>
-<% if (lru) { %>
+<% if (isLru) { %>
   <tr>
     <td>Index Block Count</td>
     <td><%= String.format("%,d", ((LruBlockCache)bc).getIndexBlockCount()) %></td>
@@ -117,14 +113,14 @@
     <td><%= TraditionalBinaryPrefix.long2String(bc.getCurrentSize(), "B", 1) %></td>
     <td>Size of Blocks</td>
   </tr>
-<% if (!bucketCache) { %>
+<% if (!isBucketCache) { %>
   <tr>
     <td>Size of Data Blocks</td>
     <td><%= TraditionalBinaryPrefix.long2String(bc.getCurrentDataSize(), "B", 1) %></td>
     <td>Size of DATA Blocks</td>
   </tr>
 <% } %>
-<% if (lru) { %>
+<% if (isLru) { %>
   <tr>
     <td>Size of Index Blocks</td>
     <td><%= TraditionalBinaryPrefix.long2String(((LruBlockCache)bc).getCurrentIndexSize(), "B", 1) %></td>
@@ -136,11 +132,11 @@
     <td>Size of BLOOM Blocks</td>
   </tr>
 <% } %>
-
+  <% request.setAttribute("bc", bc); %>
   <jsp:include page="blockCacheEvictions.jsp"/>
   <jsp:include page="blockCacheHits.jsp"/>
 
-<% if (bucketCache) { %>
+<% if (isBucketCache) { %>
   <tr>
     <td>Hits per Second</td>
     <td><%= bucketCacheStats.getIOHitsPerSecond() %></td>
