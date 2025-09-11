@@ -30,6 +30,7 @@
   if (format != null && format.equals("json")) {
     request.setAttribute(MasterStatusConstants.FILTER, filter);
     request.setAttribute(MasterStatusConstants.FORMAT, "json");
+    response.setContentType("application/json");
   %>
   <jsp:include page="taskMonitor.jsp"/>
 <%
@@ -141,6 +142,7 @@
 <% } %>
 
   <section>
+    <% request.setAttribute(MasterStatusConstants.PARENT, "/master.jsp"); %>
     <jsp:include page="taskMonitor.jsp"/>
   </section>
 
