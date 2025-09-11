@@ -25,25 +25,6 @@
 
   String bcUrl = bc == null ? null : "http://hbase.apache.org/devapidocs/" + bc.getClass().getName().replaceAll("\\.", "/") + ".html";
   String bcName = bc == null ? null : bc.getClass().getSimpleName();
-
-  BlockCache [] bcs = bc == null? null: bc.getBlockCaches();
-  // TODO: These 4 bcl* variables seems not to be used at all!
-  String bcl1Url = null;
-  String bcl1Name = null;
-  String bcl2Url = null;
-  String bcl2Name = null;
-  if (bcs != null) {
-    BlockCache bcl1 = bcs[0];
-    if (bcl1 != null) {
-      bcl1Url = "http://hbase.apache.org/devapidocs/" + bcl1.getClass().getName().replaceAll("\\.", "/") + ".html";
-      bcl1Name = bcl1.getClass().getSimpleName();
-    }
-    if (bcs.length == 2) {
-      BlockCache bcl2 = bcs[1];
-      bcl2Url = "http://hbase.apache.org/devapidocs/" + bcl2.getClass().getName().replaceAll("\\.", "/") + ".html";
-      bcl2Name = bcl2.getClass().getSimpleName();
-    }
-  }
 %>
 
 <table class="table table-striped">

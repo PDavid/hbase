@@ -27,8 +27,6 @@
          import="org.apache.hadoop.hbase.io.hfile.bucket.BucketCache"
          import="org.apache.hadoop.util.StringUtils.TraditionalBinaryPrefix" %>
 
-<%-- Template for rendering Block Cache tabs in RegionServer Status page. --%>
-
 <%
   HRegionServer regionServer =
     (HRegionServer) getServletContext().getAttribute(HRegionServer.REGIONSERVER);
@@ -38,7 +36,6 @@
   BlockCache bc = (BlockCache) request.getAttribute("bc");
 
   String name = (String) request.getAttribute("name");
-  boolean evictions = (boolean) request.getAttribute("evictions");
 %>
 
 <% if (bc == null) { %>

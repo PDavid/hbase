@@ -60,6 +60,7 @@
   <td>Hit Count divided by total requests count</td>
 </tr>
 <% for (int i = 0; i < hitPeriods; i++) { %>
+<%-- These rows are hidden on page load, blockCacheInit.js will display these as paginated. --%>
 <tr id="row-<%= i %>" class="item-row" style="display: none;">
   <td>Hit Ratio for period starting at <%= bc.getStats().getWindowPeriods()[i] %></td>
   <% if (bc.getStats().getRequestCounts()[i] > 0) { %>

@@ -33,8 +33,6 @@
   BlockCache bc = regionServer.getBlockCache().orElse(null);
 
   BlockCache[] bcs = bc == null ? null : bc.getBlockCaches();
-  // TODO: evictions seems not to be used at all!
-  boolean evictions = bcs != null && bcs.length > 1;
   BlockCache l1 = bcs == null ? bc : bcs[0];
   BlockCache l2 = bcs == null ? null : bcs.length <= 1 ? null : bcs[1];
 %>
@@ -63,13 +61,11 @@
     <div class="tab-pane" id="tab_bc_l1" role="tabpanel">
       <% request.setAttribute("bc", l1); %>
       <% request.setAttribute("name", "L1"); %>
-      <% request.setAttribute("evictions", evictions); %>
       <jsp:include page="blockCacheLevel.jsp"/>
     </div>
     <div class="tab-pane" id="tab_bc_l2" role="tabpanel">
       <% request.setAttribute("bc", l2); %>
       <% request.setAttribute("name", "L2"); %>
-      <% request.setAttribute("evictions", evictions); %>
       <jsp:include page="blockCacheLevel.jsp"/>
     </div>
   </div>
