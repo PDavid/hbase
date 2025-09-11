@@ -71,9 +71,9 @@
   </tr>
 <% if (isBucketCache) { %>
   <tr>
-    <td>Implementation</td>
-    <td><%= bucketCache.getIoEngine() %></td>
     <td>IOEngine</td>
+    <td><%= bucketCache.getIoEngine() %></td>
+    <td>Supported IOEngine types: offheap, file, files, mmap or pmem. See <a href="https://hbase.apache.org/book.html#hbase.bucketcache.ioengine">hbase.bucketcache.ioengine</a>.</td>
   </tr>
 <% } %>
   <tr>
